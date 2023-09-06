@@ -1,0 +1,35 @@
+app = "fitplot-gateway"
+primary_region = "lax"
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[env]
+  KONG_DATABASE="off"
+  KONG_PROXY_ACCESS_LOG="/dev/stdout"
+  KONG_ADMIN_ACCESS_LOG="/dev/stdout"
+  KONG_PROXY_ERROR_LOG="/dev/stderr"
+  KONG_ADMIN_ERROR_LOG="/dev/stderr"
+  KONG_ADMIN_LISTEN="0.0.0.0:8001"
+  # Fly.io favors ipv6, the dns server at fcaa::3 returns an AAAA record 
+  KONG_DNS_ORDER="LAST,SRV,A,AAAA,CNAME"
+
+[experimental]
+  auto_rollback = true
+
+# Kong Gateway
+[[services]]
+  protocol = "tcp"
+  internal_port = 8000
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+# Kong Admin
+# [[services]]
+#   internal_port = 8001
+#   protocol = "tcp"
+
+#   [[services.ports]]
+#     handlers = ["tls", "http"]
+#     port = "10001"

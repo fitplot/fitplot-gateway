@@ -1,0 +1,21 @@
+_format_version: "3.0"
+
+# The _transform metadata is an optional boolean (defaults to true), which controls whether schema transformations will occur while importing.
+# If you are importing already hashed/encrypted credentials, set _transform to false so that the encryption does not happen twice.
+_transform: false
+
+services:
+  - name: fitplot-api
+    url: http://fitplot-api-dev.internal:8080
+    routes:
+      - name: fitplot-api-routes
+        strip_path: false
+        paths:
+          - /api
+  - name: fitplot
+    url: http://fitplot-dev.internal:8080
+    routes:
+      - name: fitplot-routes
+        strip_path: false
+        paths:
+          - /
