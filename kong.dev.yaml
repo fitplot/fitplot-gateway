@@ -8,14 +8,12 @@ services:
   - name: fitplot-api
     url: http://fitplot-api-dev.internal:8080
     routes:
-      - name: fitplot-api-routes
-        strip_path: false
+      - strip_path: false
         paths:
           - /api
   - name: fitplot
     url: http://fitplot-dev.internal:8080
     routes:
-      - name: fitplot-routes
-        strip_path: false
+      - strip_path: false
         paths:
           - /
